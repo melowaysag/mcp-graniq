@@ -35,9 +35,12 @@ export async function runStdioBridge(opts: StdioBridgeOptions): Promise<void> {
   const writeLine = (obj: unknown) => {
     stdout.write(JSON.stringify(obj) + "\n");
   };
-  const logErr = (msg: string) => {
-    stderr.write(`[graniq-mcp] ${msg}\n`);
+  const debug = !!(typeof process !== "undefined" && process.env?.["GRANIQ_DEBUG"]);
+  const logErr = (msg: string, extra?: Record<string, unknown>) => {
+    const line = debug && extra ? `[graniq-mcp] ${msg} ${JSON.stringify(extra)}\n` : `[graniq-mcp] ${msg}\n`;
+    stderr.write(line);
   };
+  if (debug) logErr("bridge.start", { apiUrl, pkg: "@graniq/mcp@0.1.0-rc.1" });
 
   let buffer = "";
   const handleLine = async (line: string) => {
