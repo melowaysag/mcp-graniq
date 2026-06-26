@@ -130,6 +130,20 @@ async function cmdTest(positional: string[], flags: Record<string, string | bool
   process.stdout.write(JSON.stringify(result, null, 2) + "\n");
 }
 
+async function cmdDiagnose(flags: Record<string, string | boolean>) {
+  const report = await runDiagnose({ token: resolveToken(flags), apiUrl: resolveApiUrl(flags) });
+  const out = (flags["out"] as string) || "";
+  const json = JSON.stringify(report, null, 2);
+  if (out) {
+    const { writeFileSync } = await import("node:fs");
+    writeFileSync(out, json + "\n", "utf8");
+    process.stderr.write(`diagnose: wrote ${out}\n`);
+  } else {
+    process.stdout.write(json + "\n");
+  }
+  process.exit(report.doctor.ok ? 0 : 1);
+}
+
 async function main() {
   const { cmd, positional, flags } = parseArgs(process.argv.slice(2));
   try {
@@ -156,6 +170,9 @@ async function main() {
         return;
       case "config":
         await cmdConfig(positional, flags);
+        return;
+      case "diagnose":
+        await cmdDiagnose(flags);
         return;
       case "test":
         await cmdTest(positional, flags);
