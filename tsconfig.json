@@ -1,0 +1,12 @@
+{
+  "extends": "../../tooling/tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "types": ["node"],
+    "paths": {
+      "@graniq/errors": ["../errors/src/index.ts"],
+      "@graniq/types": ["../types/src/index.ts"]
+    }
+  },
+  "include": ["src"]
+}

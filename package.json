@@ -1,0 +1,42 @@
+{
+  "name": "@graniq/mcp",
+  "version": "0.1.0",
+  "description": "Cliente oficial da plataforma Graniq para qualquer ambiente compatível com MCP (Model Context Protocol). Inclui Client API, stdio bridge, CLI, geradores de configuração para Claude Desktop/Cursor/Windsurf/VS Code e diagnóstico.",
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "README.md", "CHANGELOG.md"],
+  "bin": {
+    "graniq-mcp": "./dist/cli.cjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@graniq/errors": "file:../errors",
+    "@graniq/types": "file:../types"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "tsup": "^8.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "keywords": ["graniq", "mcp", "model-context-protocol", "claude", "cursor", "windsurf", "finance"],
+  "license": "UNLICENSED"
+}
