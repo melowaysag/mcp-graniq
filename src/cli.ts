@@ -58,7 +58,8 @@ Usage:
 
 Commands:
   stdio                            Start stdio bridge (used by MCP clients)
-  doctor                           Verify token, server reachability and capabilities
+  doctor                           Full environment + server diagnostic (human-readable)
+  diagnose [--out=path.json]       Emit JSON support bundle (for issue reports)
   list-tools                       List tools available for the current token
   config <target> [--write]        Print config snippet for: ${ALL_TARGETS.join(" | ")}
   test <tool> [json-args]          Invoke a tool, print the result
