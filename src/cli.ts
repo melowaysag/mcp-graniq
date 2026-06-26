@@ -14,7 +14,7 @@
 // ════════════════════════════════════════════════════════════════
 import { runStdioBridge } from "./stdio.js";
 import { createGraniqMCP, GraniqMCPError } from "./client.js";
-import { runDoctor } from "./diagnostics.js";
+import { runDoctor, runDiagnose } from "./diagnostics.js";
 import { generateConfig, ALL_TARGETS, type ConfigTarget } from "./configGenerators.js";
 import { PACKAGE_VERSION, DEFAULT_API_URL } from "./types.js";
 

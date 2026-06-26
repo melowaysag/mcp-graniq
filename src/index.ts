@@ -1,7 +1,7 @@
 // Public surface of @graniq/mcp.
 export { GraniqMCPClient, GraniqMCPError, createGraniqMCP } from "./client.js";
 export { runStdioBridge, type StdioBridgeOptions } from "./stdio.js";
-export { runDoctor, type DoctorReport, type CheckResult } from "./diagnostics.js";
+export { runDoctor, runDiagnose, type DoctorReport, type DiagnoseReport, type CheckResult } from "./diagnostics.js";
 export {
   generateConfig,
   ALL_TARGETS,
