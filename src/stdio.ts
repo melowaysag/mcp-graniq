@@ -53,6 +53,10 @@ export async function runStdioBridge(opts: StdioBridgeOptions): Promise<void> {
       writeLine({ jsonrpc: "2.0", id: null, error: { code: -32700, message: "Parse error" } });
       return;
     }
+    const method = (payload as { method?: string })?.method;
+    const id = (payload as { id?: unknown })?.id;
+    const t0 = Date.now();
+    if (debug) logErr("rpc.in", { method, id });
     try {
       const res = await fetchImpl(apiUrl, {
         method: "POST",
@@ -64,8 +68,12 @@ export async function runStdioBridge(opts: StdioBridgeOptions): Promise<void> {
         body: JSON.stringify(payload),
       });
       // Notifications => server returns 204; nothing to forward.
-      if (res.status === 204) return;
+      if (res.status === 204) {
+        if (debug) logErr("rpc.notify", { method, ms: Date.now() - t0 });
+        return;
+      }
       const text = await res.text();
+      if (debug) logErr("rpc.out", { method, id, status: res.status, ms: Date.now() - t0, bytes: text.length });
       if (!text) return;
       // Forward verbatim to preserve id/error shape.
       stdout.write(text.endsWith("\n") ? text : text + "\n");
