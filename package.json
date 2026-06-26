@@ -1,10 +1,26 @@
 {
   "name": "@graniq/mcp",
   "version": "0.1.0-rc.1",
-  "description": "Cliente oficial da plataforma Graniq para qualquer ambiente compatível com MCP (Model Context Protocol). Inclui Client API, stdio bridge, CLI, geradores de configuração para Claude Desktop/Cursor/Windsurf/VS Code e diagnóstico.",
+  "description": "Official Graniq client for any MCP (Model Context Protocol) compatible environment. Includes Client API, stdio bridge, CLI, config generators for Claude Desktop / Cursor / Windsurf / VS Code, and diagnostics.",
   "type": "module",
   "sideEffects": false,
-  "files": ["dist", "README.md", "CHANGELOG.md"],
+  "license": "MIT",
+  "author": "Graniq <dev@graniq.com.br> (https://graniq.com.br)",
+  "homepage": "https://graniq.com.br/mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graniq/mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/graniq/mcp/issues"
+  },
+  "funding": "https://graniq.com.br",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "bin": {
     "graniq-mcp": "./dist/cli.cjs"
   },
@@ -21,22 +37,43 @@
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --coverage"
+    "test": "vitest run --coverage",
+    "lint": "echo \"lint placeholder — wire eslint when ready\"",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build",
+    "release": "npm version --no-git-tag-version"
   },
-  "dependencies": {
-    "@graniq/errors": "file:../errors",
-    "@graniq/types": "file:../types"
-  },
+  "dependencies": {},
+  "peerDependencies": {},
   "devDependencies": {
-    "typescript": "^5.4.0",
-    "vitest": "^1.6.0",
+    "@graniq/errors": "file:../errors",
+    "@graniq/types": "file:../types",
+    "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^1.6.0",
     "tsup": "^8.0.0",
-    "@types/node": "^20.0.0"
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
   },
   "engines": {
     "node": ">=18.17"
   },
-  "keywords": ["graniq", "mcp", "model-context-protocol", "claude", "cursor", "windsurf", "finance"],
-  "license": "UNLICENSED"
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "graniq",
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "claude-desktop",
+    "cursor",
+    "windsurf",
+    "vscode",
+    "chatgpt",
+    "ai",
+    "finance",
+    "open-finance",
+    "cli",
+    "stdio"
+  ]
 }

@@ -1,0 +1,29 @@
+# Source — only ship dist/
+src
+examples
+docs
+.github
+tooling
+
+# Configs
+tsconfig.json
+tsup.config.ts
+vitest.config.ts
+.editorconfig
+.prettierrc
+.eslintrc
+.eslintrc.cjs
+
+# Tests
+*.test.ts
+*.test.js
+coverage
+
+# Misc
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+RELEASE.md
+.gitignore
+.npmrc
+node_modules

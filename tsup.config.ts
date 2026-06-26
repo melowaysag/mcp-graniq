@@ -1,6 +1,8 @@
 import { defineConfig } from "tsup";
 
-// Two entries: the library (ESM+CJS+dts) and the CLI binary (CJS only with shebang).
+// Two entries: the library (ESM+CJS+dts) and the CLI binary (CJS with shebang).
+// We bundle @graniq/* workspace deps into dist so the published tarball is fully
+// self-contained (no broken `file:` resolutions when users `npm i @graniq/mcp`).
 export default defineConfig([
   {
     entry: ["src/index.ts"],
@@ -11,7 +13,8 @@ export default defineConfig([
     target: "es2022",
     splitting: false,
     treeshake: true,
-    external: [/^@graniq\//, /^node:/],
+    noExternal: [/^@graniq\//],
+    external: [/^node:/],
   },
   {
     entry: { cli: "src/cli.ts" },
@@ -21,6 +24,7 @@ export default defineConfig([
     splitting: false,
     treeshake: true,
     banner: { js: "#!/usr/bin/env node" },
-    external: [/^@graniq\//, /^node:/],
+    noExternal: [/^@graniq\//],
+    external: [/^node:/],
   },
 ]);
