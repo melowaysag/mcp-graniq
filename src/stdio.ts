@@ -77,19 +77,20 @@ export async function runStdioBridge(opts: StdioBridgeOptions): Promise<void> {
     }
   };
 
-  return await new Promise<void>((resolve, reject) => {
+  const inflight: Promise<void>[] = [];
+  await new Promise<void>((resolve, reject) => {
     const onData = (chunk: Buffer | string) => {
       buffer += typeof chunk === "string" ? chunk : chunk.toString("utf8");
       let idx = buffer.indexOf("\n");
       while (idx !== -1) {
         const line = buffer.slice(0, idx);
         buffer = buffer.slice(idx + 1);
-        void handleLine(line);
+        inflight.push(handleLine(line));
         idx = buffer.indexOf("\n");
       }
     };
     const onEnd = () => {
-      if (buffer.trim()) void handleLine(buffer);
+      if (buffer.trim()) inflight.push(handleLine(buffer));
       resolve();
     };
     const onErr = (e: Error) => reject(e);
@@ -99,4 +100,5 @@ export async function runStdioBridge(opts: StdioBridgeOptions): Promise<void> {
     stdin.once("error", onErr);
     opts.signal?.addEventListener("abort", () => resolve(), { once: true });
   });
+  await Promise.all(inflight);
 }
