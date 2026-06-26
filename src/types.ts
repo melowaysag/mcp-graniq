@@ -5,7 +5,7 @@
 export const DEFAULT_API_URL = "https://izfwjyzpwewirrqeuzlu.functions.supabase.co/mcp-server";
 export const PROTOCOL_VERSION = "2024-11-05";
 export const PACKAGE_NAME = "@graniq/mcp";
-export const PACKAGE_VERSION = "0.1.0";
+export const PACKAGE_VERSION = "0.1.0-rc.1";
 
 export interface GraniqMCPConfig {
   /** Personal Access Token gerado em Settings → Conectar IA (prefixo `gmcp_`). */

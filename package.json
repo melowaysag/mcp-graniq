@@ -1,6 +1,6 @@
 {
   "name": "@graniq/mcp",
-  "version": "0.1.0",
+  "version": "0.1.0-rc.1",
   "description": "Cliente oficial da plataforma Graniq para qualquer ambiente compatível com MCP (Model Context Protocol). Inclui Client API, stdio bridge, CLI, geradores de configuração para Claude Desktop/Cursor/Windsurf/VS Code e diagnóstico.",
   "type": "module",
   "sideEffects": false,
