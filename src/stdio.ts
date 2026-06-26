@@ -79,14 +79,14 @@ export async function runStdioBridge(opts: StdioBridgeOptions): Promise<void> {
       stdout.write(text.endsWith("\n") ? text : text + "\n");
     } catch (e) {
       logErr(`forward failed: ${(e as Error).message}`);
-      const id = (payload as { id?: number | string | null })?.id ?? null;
       writeLine({
         jsonrpc: "2.0",
-        id,
+        id: (id as number | string | null | undefined) ?? null,
         error: { code: -32000, message: `Bridge error: ${(e as Error).message}` },
       });
     }
   };
+
 
   const inflight: Promise<void>[] = [];
   await new Promise<void>((resolve, reject) => {
